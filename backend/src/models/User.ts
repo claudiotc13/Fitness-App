@@ -1,39 +1,18 @@
-import { IUser } from '../interfaces/IUser';
+import mongoose, { Schema, Document } from "mongoose";
 
-class User implements IUser{
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    
-    constructor(id:number, name:string, email:string, password:string) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
-
-    set_password(password:string) {
-        this.password = password;
-    }
-
-    set_name(name:string) {
-        this.name = name;
-    }
-
-    set_email(email:string) {
-        this.email = email;
-    }
-
-    get_id() {
-        return this.id;
-    }
-
-    get_name() {
-        return this.name;
-    }
-
-    get_email() {
-        return this.email;
-    }
+// Define the IUser interface for TypeScript typing
+export interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
 }
+
+// Create the Mongoose schema
+const UserSchema: Schema = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+
+// Export the model
+export default mongoose.model<IUser>("User", UserSchema);
