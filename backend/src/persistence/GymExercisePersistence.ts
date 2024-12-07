@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import GymExercise, { IGymExercise } from '../models/GymExercise';
+import { Service } from 'typedi';
 
+@Service()
 export class GymExercisePersistence {
     async saveNewGymExercise(gymExercise: IGymExercise): Promise<IGymExercise> {
         return await gymExercise.save();

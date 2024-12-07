@@ -1,11 +1,11 @@
+import { Service, Inject } from "typedi";
 import { ManageUserService } from "../services/ManageUserService";
 
+@Service()
 export class ManageUserController{
-    private manageUserService: ManageUserService;
-
-    constructor(){
-        this.manageUserService = new ManageUserService();
-    }
+    constructor(
+        @Inject(() => ManageUserService) private manageUserService: ManageUserService
+    ){}
 
     async createUser(name: string, username: string, email: string, password: string){
         try {

@@ -1,11 +1,12 @@
+import { Service, Inject } from "typedi";
 import { ManageExercisesService } from "../services/ManageExercisesService";
 
+@Service()
 export class ManageExercisesController {
-    private manageExercisesService: ManageExercisesService;
 
-    constructor() {
-        this.manageExercisesService = new ManageExercisesService();
-    }
+    constructor( 
+        @Inject(() => ManageExercisesService) private manageExercisesService : ManageExercisesService
+    ) {}
 
     async createGymExercise(name: string, description: string, muscle_group: string) {
         try {

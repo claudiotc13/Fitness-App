@@ -1,8 +1,10 @@
+import 'reflect-metadata';
 import express from "express";
+import { Container } from "typedi";
 import { ManageExercisesController } from "../controllers/ManageExercisesController";
 
 const exercisesRouter = express.Router();
-const exercisesController = new ManageExercisesController();
+const exercisesController = Container.get(ManageExercisesController);
 
 // Route to create a gym exercise
 exercisesRouter.post("/gym-exercises", async (req, res) => {

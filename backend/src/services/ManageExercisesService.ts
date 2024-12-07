@@ -1,8 +1,13 @@
 import GymExercise, { IGymExercise } from '../models/GymExercise';
 import { GymExercisePersistence } from '../persistence/GymExercisePersistence';
+import { Service, Inject } from 'typedi';
 
+@Service()
 export class ManageExercisesService {
-    private gymExercisePersistence = new GymExercisePersistence();
+
+    constructor(
+        @Inject(() => GymExercisePersistence) private gymExercisePersistence: GymExercisePersistence
+    ){}
 
     async createGymExercise(name: string, description: string, muscle_group: string): Promise<IGymExercise> {
         try {

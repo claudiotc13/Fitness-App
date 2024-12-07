@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import User, { IUser } from '../models/User';
+import { Service } from 'typedi';
 
+@Service()
 export class UserPersistence {
   async saveNewUser(user: IUser): Promise<IUser> {
     return await user.save();

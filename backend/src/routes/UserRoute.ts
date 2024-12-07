@@ -1,8 +1,10 @@
+import 'reflect-metadata';
 import express from "express";
 import { ManageUserController } from "../controllers/ManageUserController"; // Import the controller
+import Container from "typedi";
 
 const router = express.Router(); // Create a router instance
-const userController = new ManageUserController(); // Initialize the controller
+const userController = Container.get(ManageUserController) // Initialize the controller
 
 // Route to create a user
 router.post("/users", async (req, res) => {

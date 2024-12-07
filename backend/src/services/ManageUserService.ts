@@ -4,11 +4,17 @@ import FitnessProfile, { IFitnessProfile } from "../models/FitnessProfile"; // I
 import { Collection } from "mongoose";
 import { UserPersistence } from "../persistence/UsersPersistence";
 import { FitnessProfilesPersistence } from "../persistence/FitnessProfilesPersistence";
+import { Service, Inject } from "typedi";
 
+@Service()
 export class ManageUserService {
 
-    private userPersistence = new UserPersistence();
-    private fitnessProfilesPersistence = new FitnessProfilesPersistence();
+    constructor(
+        @Inject(() => UserPersistence) private userPersistence: UserPersistence,
+        @Inject(() => FitnessProfilesPersistence) private fitnessProfilesPersistence: FitnessProfilesPersistence
+    ){}
+
+
 
     async createUser(name: string, username: string, email: string, password: string): Promise<IUser> {
         try {
