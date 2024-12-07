@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import connectDB from "../dataBase/db";
 import router from "../routes/UserRoute";
+import exercisesRouter from "../routes/ExercisesRoute";
 
 const app = express();
 
@@ -13,6 +14,7 @@ connectDB();
 
 // Mount the user routes
 app.use("/api", router);
+app.use("/api", exercisesRouter);
 
 // Start the server
 const PORT = 8080;
