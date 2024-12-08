@@ -72,4 +72,8 @@ export class ManageUserService {
         }
     }
 
+    async getUserByUsername(username: string): Promise<IUser | null> {
+        return await this.userPersistence.getUserByUsername(username);
+    }
+
 }
