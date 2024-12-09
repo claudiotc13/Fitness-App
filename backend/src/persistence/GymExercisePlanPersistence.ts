@@ -16,6 +16,10 @@ export class GymExercisePlanPersistence {
         return await GymExercisePlan.findOne({ username }).exec();
     }
 
+    async getGymExercisePlanByUsernameAndGymExercise(username: string, gymExercise: string): Promise<IGymExercisePlan | null> {
+        return await GymExercisePlan.findOne({ username, gymExercise }).exec();
+    }
+
     async updateGymExercisePlan(id: string, gymExercisePlan: Partial<IGymExercisePlan>): Promise<IGymExercisePlan | null> {
         return await GymExercisePlan.findByIdAndUpdate(id, gymExercisePlan, { new: true }).exec();
     }

@@ -2,7 +2,10 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    const uri = "mongodb://localhost:27017/fitnessApp"; 
+    //use on macOS
+    //const uri = "mongodb://localhost:27017/fitnessApp"; 
+    //use on Windows
+    const uri = "mongodb://127.0.0.1:27017/fitnessApp"; 
     await mongoose.connect(uri); 
     console.log("MongoDB connected!");
   } catch (error) {

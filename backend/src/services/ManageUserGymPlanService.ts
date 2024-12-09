@@ -26,12 +26,26 @@ export class ManageUserGymPlanService {
             throw new Error("User does not exist");
 
         } else {
+            const exercisePlansConverted: IGymExercisePlan[] = [];
+
+            for(let i = 0; i < exercisePlans.length; i++){
+                // Verify if gym exercise plan exists
+                const exercise = await this.gymExercisePlanPersistence.getGymExercisePlanByUsernameAndGymExercise(username, exercisePlans[i]);
+
+                if(!exercise){
+                    throw new Error("Gym exercise plan does not exist");
+                }
+                
+                console.log("Exercise plan found:", exercise);
+
+                exercisePlansConverted.push(exercise);
+            }
 
             try {
                 // Create a new user gym plan document
                 const userGymPlan = new UserGymPlan({
                     username,
-                    exercisePlans
+                    exercisePlans: exercisePlansConverted
                 });
 
                 // Save the user gym plan to the database
